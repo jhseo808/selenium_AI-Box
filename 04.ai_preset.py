@@ -1,0 +1,153 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+
+import time
+import pyautogui
+
+options = Options()
+options.add_experimental_option("detach", True)
+service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+driver.implicitly_wait(3)
+driver.maximize_window()
+
+url = 'http://172.16.4.114/web/#/web/auth'
+driver.get(url)
+action = ActionChains(driver)
+
+#로그인
+driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
+(
+action.send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform()
+)
+action.reset_actions
+time.sleep(2)
+
+#영상분석 페이지
+url = 'http://172.16.4.114/web/#/web/ai'
+driver.get(url)
+time.sleep(1)
+ch_list = driver.find_element(By.CSS_SELECTOR,'#chSelect > div > div.mat-select-arrow-wrapper')
+ch_list.click()
+ch2_mv = driver.find_element(By.XPATH, '//*[@id="mat-option-27"]/span')
+ch2_mv.click()
+preset_pg = driver.find_element(By.ID, 'mat-tab-label-0-3')
+preset_pg.click()
+time.sleep(2)
+
+pyautogui.scroll(-700)
+list_all = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[1]/button[1]')
+list_all.click()
+time.sleep(0.5)
+list_del = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[2]')
+list_del.click()
+pyautogui.scroll(-700)
+preset_no = driver.find_element(By.CSS_SELECTOR, '#mat-input-8')
+preset_no.clear()
+preset_no.click()
+preset_no.send_keys("1")
+list_add = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[1]')
+list_add.click()
+time.sleep(0.5)
+preset_no = driver.find_element(By.CSS_SELECTOR, '#mat-input-8')
+preset_no.clear()
+preset_no.click()
+preset_no.send_keys("2")
+list_add = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[1]')
+list_add.click()
+time.sleep(0.5)
+pyautogui.scroll(-700)
+preset_no = driver.find_element(By.CSS_SELECTOR, '#mat-input-8')
+preset_no.clear()
+preset_no.click()
+preset_no.send_keys("3")
+list_add = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[1]')
+list_add.click()
+time.sleep(0.5)
+preset_no = driver.find_element(By.CSS_SELECTOR, '#mat-input-8')
+preset_no.clear()
+preset_no.click()
+preset_no.send_keys("4")
+list_add = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[1]')
+list_add.click()
+time.sleep(0.5)
+preset_no = driver.find_element(By.CSS_SELECTOR, '#mat-input-8')
+preset_no.clear()
+preset_no.click()
+preset_no.send_keys("5")
+list_add = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[1]')
+list_add.click()
+time.sleep(0.5)
+pyautogui.scroll(-700)
+
+preset_name1 = driver.find_element(By.ID, 'mat-input-27') #+3증가
+preset_name1.click()
+preset_name1.send_keys('test Preset1!!!!')
+preset_name2 = driver.find_element(By.ID, 'mat-input-30')
+preset_name2.click()
+preset_name2.send_keys('test Preset2!@#')
+preset_name3 = driver.find_element(By.ID, 'mat-input-33')
+preset_name3.click()
+preset_name3.send_keys('test Preset3!테스트')
+preset_name4 = driver.find_element(By.ID, 'mat-input-36')
+preset_name4.click()
+preset_name4.send_keys('test Preset4...1111')
+preset_name5 = driver.find_element(By.ID, 'mat-input-39')
+preset_name5.click()
+preset_name5.send_keys('test Preset5555555')
+
+list_chk1 = driver.find_element(By.ID, 'mat-checkbox-12')
+list_chk1.click()
+list_chk2 = driver.find_element(By.ID, 'mat-checkbox-13')
+list_chk2.click()
+list_down = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[4]')
+list_down.click()
+time.sleep(1)
+list_chk1 = driver.find_element(By.ID, 'mat-checkbox-12')
+list_chk1.click()
+list_down = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[4]')
+list_down.click()
+list_down.click()
+list_down.click()
+list_up = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[3]')
+list_up.click()
+list_chk4 = driver.find_element(By.ID, 'mat-checkbox-15')
+list_chk4.click()
+list_chk2.click()
+list_del = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[2]')
+list_del.click()
+
+preset_eventzone = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[2]/form/mat-table/mat-row[1]/mat-cell[6]/button')
+preset_eventzone.click()
+
+btn_cancel = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/router-outlet/app-ai/div/mat-card/mat-list[1]/div/div/app-btn-cancel/button/span')
+btn_cancel.click()
+preset_eventzone = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[2]/form/mat-table/mat-row[1]/mat-cell[6]/button')
+preset_eventzone.click()
+btn_apply = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/router-outlet/app-ai/div/mat-card/mat-list[1]/div/div/app-btn-apply/button/span')
+btn_apply.click()
+time.sleep(2)
+popup_apply = driver.find_element(By.XPATH, '//*[@id="mat-dialog-5"]/app-dialogs/div[2]/button')
+popup_apply.click()
+
+
+
+#list_disable = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[1]/button[2]')
+#list_disable.click()
+#time.sleep(0.5)
+#list_add = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[1]')
+#list_add.click()
+#time.sleep(0.5)
+#list_del = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[2]')
+#list_del.click()
+#time.sleep(0.5)
+#list_up = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[3]')
+#list_up.click()
+#time.sleep(0.5)
+#list_down = driver.find_element(By.XPATH, '//*[@id="mat-tab-content-0-3"]/div/mat-list/div[2]/div/app-preset-touring/div/mat-list/div/mat-card/div[1]/div[2]/div/div[2]/button[4]')
+#list_down.click()
