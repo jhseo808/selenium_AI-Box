@@ -88,24 +88,17 @@ driver.get('http://172.16.4.114/web/#/web/live')
 osd_btn = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-card:nth-child(3) > div > button')
 osd_btn.click() # 1채널 화면 표시 팝업 출력
 time.sleep(1)
-osd_eventbox = driver.find_element(By.ID, 'mat-checkbox-3') # default enable
-osd_eventbox.click()
-osd_object_id = driver.find_element(By.ID, 'mat-checkbox-4')
-osd_object_id.click()
-osd_object_category = driver.find_element(By.ID, 'mat-checkbox-5')
-osd_object_category.click()
-osd_eventmsg = driver.find_element(By.ID, 'mat-checkbox-6')
-osd_eventmsg.click()
-osd_count = driver.find_element(By.ID, 'mat-checkbox-7') # default disable 이벤트 영역 활성화시 enable 처리
-osd_numberplate = driver.find_element(By.ID, 'mat-checkbox-8')
-osd_numberplate.click()
-osd_eventzone = driver.find_element(By.ID, 'mat-checkbox-9')
-osd_eventzone.click()
-osd_objectzone = driver.find_element(By.ID, 'mat-checkbox-10')
-osd_objectzone.click()
-osd_nonobjectzone = driver.find_element(By.ID, 'mat-checkbox-11')
-osd_nonobjectzone.click()
-osd_dynamiczone = driver.find_element(By.ID, 'mat-checkbox-12')
-osd_dynamiczone.click()
-osd_roizone = driver.find_element(By.ID, 'mat-checkbox-13').click
+driver.find_element(By.ID, 'mat-checkbox-3').click() # 이벤트가 발생한 물체만 표시 (default:enable)
+driver.find_element(By.ID, 'mat-checkbox-4').click() # 객체ID
+driver.find_element(By.ID, 'mat-checkbox-5').click() # 객체 종류
+driver.find_element(By.ID, 'mat-checkbox-6').click() # 이벤트 메시지
+driver.find_element(By.ID, 'mat-checkbox-8').click() # 차량 번호   
+driver.find_element(By.ID, 'mat-checkbox-9').click()  # 이벤트 영역
+driver.find_element(By.ID, 'mat-checkbox-10').click() # 객체 감지 영역
+driver.find_element(By.ID, 'mat-checkbox-11').click() # 객체 비감지 영역
+driver.find_element(By.ID, 'mat-checkbox-12').click() # 동적 배경 영역
+driver.find_element(By.ID, 'mat-checkbox-13').click() # 객체 감지 ROI
+driver.find_element(By.ID, 'mat-checkbox-7').click() # 계수기 (default:disable)
+osd_apply_btn = driver.find_element(By.XPATH, '//*[@id="mat-dialog-0"]/display-option-dialog/div/div[2]/button[1]/span')
+osd_apply_btn.click()
 
