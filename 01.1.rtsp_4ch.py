@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 import time
+import pyautogui
 import os
 try:
     os.makedirs('D:\Auto_test')
@@ -22,93 +23,19 @@ driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(3)
 driver.maximize_window()
 
-url = 'http://172.16.6.230/web/#/web/auth'
-driver.get(url)
+driver.get('http://172.16.6.230')
 action = ActionChains(driver)
 
-#로그인
 driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
-(
-    action.send_keys('admin').key_down(Keys.TAB)
-    .send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform()
-)
+(action.send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform()) # 로그인
 action.reset_actions
-time.sleep(1)
-print('로그인 OK')
-
-url = 'http://172.16.6.230/web/#/web/camera-setting' # 카메라 등록 페이지
-driver.get(url)
-
-# driver.find_element(By.XPATH, \
-    # '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[1]/mat-cell[1]/button'\
-        # ).click() # 채널 1 카메라 삭제
-# print('채널 1 삭제')
-# driver.find_element(By.XPATH, \
-    # '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[3]/mat-cell[1]/button'\
-        # ).click() # 채널 2 카메라 삭제
-# print('채널 2 삭제')
-# driver.find_element(By.XPATH, \
-    # '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[5]/mat-cell[1]/button'\
-        # ).click() # 채널 3 카메라 삭제
-# print('채널 3 삭제')
-# driver.find_element(By.XPATH, \
-    # '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[7]/mat-cell[1]/button'\
-        # ).click() # 채널 4 카메라 삭제
-# print('채널 4 삭제')
-# driver.find_element(By.CSS_SELECTOR, \
-    # 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-camera-setting > div > mat-card > form > div > app-btn-apply > button'\
-        # ).click() # 카메라 페이지 적용
-# print('채널 전체 삭제')
-
-#채널1번
-ch1 = driver.find_element(By.CSS_SELECTOR, '#mat-input-12')
-ch1.clear()
-ch1.click()
-(
-    action.send_keys('Test!테스트@#123').key_down(Keys.TAB).send_keys('rtsp://172.16.4.164/video1+audio1').key_down(Keys.TAB)
-    .send_keys('admin').key_down(Keys.TAB).send_keys('pass0001!').perform()
-)
-#채널2번
-ch2 = driver.find_element(By.CSS_SELECTOR, '#mat-input-18')
-ch2.clear()
-ch2.click()
-(
-    action.send_keys('QA!한글00000456').key_down(Keys.TAB).send_keys('rtsp://172.16.4.163/video1+audio1').key_down(Keys.TAB)
-    .send_keys('admin').key_down(Keys.TAB).send_keys('pass0001!').perform()
-)
-#채널3번
-ch3 = driver.find_element(By.CSS_SELECTOR, '#mat-input-24')
-ch3.clear()
-ch3.click()
-(
-    action.send_keys('InetlliVIX연결999').key_down(Keys.TAB).send_keys('rtsp://172.16.4.119/ch1/stream1/media.imp').key_down(Keys.TAB)
-    .send_keys('intellivix').key_down(Keys.TAB).send_keys('pass0001!').perform()
-)
-#채널4번_PTZ
-ch4 = driver.find_element(By.CSS_SELECTOR, '#mat-input-30')
-ch4.clear()
-ch4.click()
-(
-    action.send_keys('PTZ카메라연결').key_down(Keys.TAB).send_keys('rtsp://172.16.4.163/video1+audio1').key_down(Keys.TAB)
-    .send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').perform()
-)
-ch4PTZlist = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-camera-setting > div > mat-card > form > mat-table > mat-row:nth-child(9) > mat-cell.mat-cell.cdk-column-conType.mat-column-conType.ng-star-inserted > mat-form-field')
-ch4PTZlist.click()
-ch4PTZ = driver.find_element(By.CSS_SELECTOR, '#mat-option-157 > span')
-ch4PTZ.click()
-
-driver.find_element(By.CSS_SELECTOR, \
-    'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-camera-setting > div > mat-card > form > div > app-btn-apply > button'\
-        ).click() # 카메라 페이지 적용
-print('4채널 카메라 등록 OK')
-driver.get_screenshot_as_file('D:\Auto_test\camera_list.png')
-
-driver.get('http://172.16.6.230/web/#/web/live') # 라이브 페이지
+time.sleep(2)
+print('Login OK!\n----------------------------------------------------------------------------------------------------------------')
 
 osd_btn = driver.find_element(By.CSS_SELECTOR,\
     'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-card:nth-child(3) > div > button'\
         )
-osd_btn.click() # 화면 표시 팝업 출력
+osd_btn.click() # 화면 표시 팝업
 time.sleep(1)
 driver.find_element(By.ID, 'mat-checkbox-3').click() # 이벤트가 발생한 물체만 표시 (default:enable)
 driver.find_element(By.ID, 'mat-checkbox-4').click() # 객체ID
@@ -121,74 +48,60 @@ driver.find_element(By.ID, 'mat-checkbox-11').click() # 객체 비감지 영역
 driver.find_element(By.ID, 'mat-checkbox-12').click() # 동적 배경 영역
 driver.find_element(By.ID, 'mat-checkbox-13').click() # 객체 감지 ROI
 driver.find_element(By.ID, 'mat-checkbox-7').click() # 계수기 (default:disable)
-osd_apply_btn = driver.find_element(By.XPATH, '//*[@id="mat-dialog-0"]/display-option-dialog/div/div[2]/button[1]/span')
+time.sleep(1)
+osd_apply_btn = driver.find_element(By.XPATH, '//*[@id="mat-dialog-0"]/display-option-dialog/div/div[2]/button[1]')
 osd_apply_btn.click() # 화면 표시 팝업 적용
-print('화면 표시 팝업 OK')
+print('OSD All enable OK')
 
-driver.find_element(By.XPATH,\
-    '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/button/span'\
-        ).click() # 1채널 계수기 초기화
-print('1채널 계수기 초기화 OK')
-time.sleep(1)
-driver.find_element(By.CSS_SELECTOR,\
-    'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-list > mat-card > div > app-btn-va-restart'\
-        ).click() # 1채널 영상 분석 재시작
-print('1채널 영상 분석 재시작 OK')
+count_reset = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/button')
+count_reset.click() # 계수기 초기화
+va_restart = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/app-btn-va-restart/button/span')
+va_restart.click() # 영상 분석 재시작
+print('Ch1 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
+cam_list = driver.find_element(By.ID, 'mat-select-3')
+cam_list.click() # 카메라 리스트
+driver.find_element(By.ID, 'mat-option-1').click() # 채널2
+count_reset.click()
+va_restart.click()
+time.sleep(2)
+print('Ch2 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
+cam_list.click() 
+driver.find_element(By.ID, 'mat-option-2').click() # 채널3
+count_reset.click()
+va_restart.click()
+time.sleep(2)
+print('Ch3 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
+cam_list.click() 
+driver.find_element(By.ID, 'mat-option-3').click() # 채널4
+count_reset.click()
+va_restart.click()
+time.sleep(2)
+print('Ch4 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
 
-#라이브 채널별 스트린샷
-time.sleep(3)
-driver.get_screenshot_as_file('D:\Auto_test\live_ch1.png')
-print('1채널 라이브 화면 OK')
-
-mv1 = driver.find_element(By.CSS_SELECTOR,"body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-list > mat-card > div > mat-form-field")
-mv1.click()
-mv2 = driver.find_element(By.CSS_SELECTOR,"#mat-option-203 > span")
-mv2.click()
-time.sleep(3)
-driver.get_screenshot_as_file('D:\Auto_test\live_ch2.png')
-print('2채널 라이브 화면 OK')
-driver.find_element(By.XPATH,\
-    '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/button/span'\
-        ).click() # 2채널 계수기 초기화
-print('2채널 계수기 초기화 OK')
-time.sleep(1)
-driver.find_element(By.CSS_SELECTOR,\
-    'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-list > mat-card > div > app-btn-va-restart'\
-        ).click() # 2채널 영상 분석 재시작
-print('2채널 영상 분석 재시작 OK')
-
-mv2 = driver.find_element(By.CSS_SELECTOR,"body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-list > mat-card > div > mat-form-field")
-mv2.click()
-mv3 = driver.find_element(By.CSS_SELECTOR, '#mat-option-204 > span')
-mv3.click()
-time.sleep(3)
-driver.get_screenshot_as_file('D:\Auto_test\live_ch3.png')
-print('3채널 라이브 화면 OK')
-
-driver.find_element(By.XPATH,\
-    '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/button/span'\
-        ).click() # 3채널 계수기 초기화
-print('3채널 계수기 초기화 OK')
-time.sleep(1)
-driver.find_element(By.CSS_SELECTOR,\
-    'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-list > mat-card > div > app-btn-va-restart'\
-        ).click() # 3채널 영상 분석 재시작
-print('3채널 영상 분석 재시작 OK')
-
-mv3 = driver.find_element(By.CSS_SELECTOR,"body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-list > mat-card > div > mat-form-field")
-mv3.click()
-mv4 = driver.find_element(By.CSS_SELECTOR, '#mat-option-205 > span')
-mv4.click()
-time.sleep(3)
-driver.get_screenshot_as_file('D:\Auto_test\live_ch4.png')
-print('4채널 라이브 화면 OK')
-
-driver.find_element(By.XPATH,\
-    '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/button/span'\
-        ).click() # 4채널 계수기 초기화
-print('4채널 계수기 초기화 OK')
-time.sleep(1)
-driver.find_element(By.CSS_SELECTOR,\
-    'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-list > mat-card > div > app-btn-va-restart'\
-        ).click() # 4채널 영상 분석 재시작
-print('4채널 영상 분석 재시작 OK')
+pyautogui.scroll(-1000)
+ptz_r = pyautogui.locateOnScreen('ptz_right.png')
+pyautogui.mouseDown(ptz_r)
+time.sleep(2)
+ptz_l = pyautogui.locateOnScreen('ptz_left.png')
+pyautogui.mouseDown(ptz_l)
+time.sleep(2)
+ptz_u = pyautogui.locateOnScreen('ptz_up.png')
+pyautogui.mouseDown(ptz_u)
+time.sleep(2)
+ptz_d = pyautogui.locateOnScreen('ptz_down.png')
+pyautogui.mouseDown(ptz_d)
+time.sleep(2)
+ptz_dl = pyautogui.locateOnScreen('ptz_downleft.png')
+pyautogui.mouseDown(ptz_dl)
+time.sleep(2)
+ptz_dr = pyautogui.locateOnScreen('ptz_downright.png')
+pyautogui.mouseDown(ptz_dr)
+time.sleep(2)
+ptz_ul = pyautogui.locateOnScreen('ptz_upleft.png')
+pyautogui.mouseDown(ptz_ul)
+time.sleep(2)
+ptz_ur = pyautogui.locateOnScreen('ptz_upright.png')
+pyautogui.mouseDown(ptz_ur)
+time.sleep(2)
+pyautogui.click()
+print('PTZ Control OK!\n----------------------------------------------------------------------------------------------------------------')
