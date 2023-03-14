@@ -74,9 +74,9 @@ print('PTZ Home enable OK')
 
 ptz_d = pyautogui.locateOnScreen('ptz_down.png')
 pyautogui.mouseDown(ptz_d)
-time.sleep(2)
+time.sleep(5)
 home_apply = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > router-outlet > app-ai > div > mat-card > mat-list:nth-child(2) > mat-card:nth-child(2) > div:nth-child(4) > mat-card:nth-child(2) > div:nth-child(2) > div.flex-col > div > button')
-home_apply.click()
+home_apply.click() # 홈 위치 설정
 ptz_r = pyautogui.locateOnScreen('ptz_right.png')
 pyautogui.mouseDown(ptz_r)
 time.sleep(4)
