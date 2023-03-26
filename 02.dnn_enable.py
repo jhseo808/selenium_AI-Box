@@ -27,22 +27,26 @@ print('Login OK\n---------------------------------------------------------------
 
 driver.get('http://172.16.6.230/web/#/web/ai-dnn-resource') # DNN 자원 페이지
 # 검출기 활성화
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-3 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-4 > label > span').click()
+checkbox_dnn1 = [
+    '#mat-checkbox-3 > label > span',
+    '#mat-checkbox-4 > label > span',
+    '#mat-checkbox-6 > label > span',
+    '#mat-checkbox-7 > label > span']
+for dnn1 in checkbox_dnn1:
+    driver.find_element(By.CSS_SELECTOR, dnn1).click()
 # driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-5 > label > span').click() # default로 활성화
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-6 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-7 > label > span').click()
-print('DNN Detector All complete!\n----------------------------------------------------------------')
 
 # 인식모듈 활성화
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-8 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-9 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-10 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-11 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-12 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-13 > label > span').click()
-driver.find_element(By.CSS_SELECTOR, '#mat-checkbox-14 > label > span').click()
-print('DNN Recognition-Module All complete!\n----------------------------------------------------------------')
+checkbox_dnn2 = [
+    '#mat-checkbox-8 > label > span', 
+    '#mat-checkbox-9 > label > span', 
+    '#mat-checkbox-10 > label > span', 
+    '#mat-checkbox-11 > label > span', 
+    '#mat-checkbox-12 > label > span',
+    '#mat-checkbox-13 > label > span',
+    '#mat-checkbox-14 > label > span']
+for dnn2 in checkbox_dnn2:
+    driver.find_element(By.CSS_SELECTOR, dnn2).click()
 
 driver.find_element(
     By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-ai-dnn-resource > div > mat-card > div:nth-child(4) > app-btn-apply > button > span'
