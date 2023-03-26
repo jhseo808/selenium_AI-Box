@@ -37,17 +37,12 @@ osd_btn = driver.find_element(By.CSS_SELECTOR,\
         )
 osd_btn.click() # 화면 표시 팝업
 time.sleep(1)
-driver.find_element(By.ID, 'mat-checkbox-3').click() # 이벤트가 발생한 물체만 표시 (default:enable)
-driver.find_element(By.ID, 'mat-checkbox-4').click() # 객체ID
-driver.find_element(By.ID, 'mat-checkbox-5').click() # 객체 종류
-driver.find_element(By.ID, 'mat-checkbox-6').click() # 이벤트 메시지
-driver.find_element(By.ID, 'mat-checkbox-8').click() # 차량 번호   
-driver.find_element(By.ID, 'mat-checkbox-9').click()  # 이벤트 영역
-driver.find_element(By.ID, 'mat-checkbox-10').click() # 객체 감지 영역
-driver.find_element(By.ID, 'mat-checkbox-11').click() # 객체 비감지 영역
-driver.find_element(By.ID, 'mat-checkbox-12').click() # 동적 배경 영역
-driver.find_element(By.ID, 'mat-checkbox-13').click() # 객체 감지 ROI
-driver.find_element(By.ID, 'mat-checkbox-7').click() # 계수기 (default:disable)
+
+checkbox_ids = ['mat-checkbox-3', 'mat-checkbox-4', 'mat-checkbox-5', 'mat-checkbox-6', 'mat-checkbox-8', 'mat-checkbox-9', 'mat-checkbox-10', 'mat-checkbox-11', 'mat-checkbox-12', 'mat-checkbox-13', 'mat-checkbox-7']
+for checkbox_id in checkbox_ids:
+    driver.find_element(By.ID, checkbox_id).click()
+time.sleep(1)
+
 time.sleep(1)
 osd_apply_btn = driver.find_element(By.XPATH, '//*[@id="mat-dialog-0"]/display-option-dialog/div/div[2]/button[1]')
 osd_apply_btn.click() # 화면 표시 팝업 적용
