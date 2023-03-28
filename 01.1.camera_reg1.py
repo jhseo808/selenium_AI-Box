@@ -45,28 +45,18 @@ print('Login OK\n---------------------------------------------------------------
 driver.get('http://172.16.6.230/web/#/web/camera-setting') # 카메라 등록 페이지
 
 # 카메라 삭제
-driver.find_element(By.XPATH, \
-     '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[1]/mat-cell[1]/button'\
-         ).click()
-print('Ch1 delete')
-driver.find_element(By.XPATH, \
-     '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[3]/mat-cell[1]/button'\
-         ).click()
-print('Ch2 delete')
-driver.find_element(By.XPATH, \
-    '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[5]/mat-cell[1]/button'\
-       ).click()
-print('Ch3 delete')
-driver.find_element(By.XPATH, \
-   '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[7]/mat-cell[1]/button'\
-       ).click()
-print('Ch4 delete')
+for i in range(1, 5):
+    ch_xpath = f"/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[{2*i-1}]/mat-cell[1]/button"
+    driver.find_element(By.XPATH, ch_xpath).click()
+    print(f'Ch{i} delete')
 
 driver.find_element(By.CSS_SELECTOR, \
    'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-camera-setting > div > mat-card > form > div > app-btn-apply > button'\
        ).click()
 print('All Ch delete complete!\n------------------------------------------------------------')
+time.sleep(5)
 
+# 카메라 
 ch1 = driver.find_element(By.CSS_SELECTOR, '#mat-input-12')
 ch1.click()
 (
