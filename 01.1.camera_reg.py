@@ -34,27 +34,16 @@ print('Login OK\n---------------------------------------------------------------
 driver.get('http://172.16.6.230/web/#/web/camera-setting') # 카메라 등록 페이지
 
 # 카메라 삭제
-driver.find_element(By.XPATH, \
-     '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[1]/mat-cell[1]/button'\
-         ).click()
-print('Ch1 delete')
-driver.find_element(By.XPATH, \
-     '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[3]/mat-cell[1]/button'\
-         ).click()
-print('Ch2 delete')
-driver.find_element(By.XPATH, \
-    '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[5]/mat-cell[1]/button'\
-       ).click()
-print('Ch3 delete')
-driver.find_element(By.XPATH, \
-   '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[7]/mat-cell[1]/button'\
-       ).click()
-print('Ch4 delete')
+for i in range(1, 5):
+    ch_xpath = f"/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-camera-setting/div/mat-card/form/mat-table/mat-row[{2*i-1}]/mat-cell[1]/button"
+    driver.find_element(By.XPATH, ch_xpath).click()
+    print(f'Ch{i} delete')
 
 driver.find_element(By.CSS_SELECTOR, \
    'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-camera-setting > div > mat-card > form > div > app-btn-apply > button'\
        ).click()
 print('All Ch delete complete!\n------------------------------------------------------------')
+time.sleep(5)
 
 # 카메라 등록
 ch1 = driver.find_element(By.CSS_SELECTOR, '#mat-input-12')
@@ -66,8 +55,8 @@ print('Ch1 register')
 ch2 = driver.find_element(By.CSS_SELECTOR, '#mat-input-18')
 ch2.clear()
 ch2.click()
-(action.send_keys('QA!한글00000456').key_down(Keys.TAB).send_keys('rtsp://172.16.4.161/video1+audio1').key_down(Keys.TAB)
- .send_keys('admin').key_down(Keys.TAB).send_keys('1234').perform())
+(action.send_keys('QA!한글00000456').key_down(Keys.TAB).send_keys('rtsp://172.16.6.203/video1+audio1').key_down(Keys.TAB)
+ .send_keys('admin').key_down(Keys.TAB).send_keys('admin').perform())
 print('Ch2 register')
 ch3 = driver.find_element(By.CSS_SELECTOR, '#mat-input-24')
 ch3.clear()
@@ -79,8 +68,8 @@ ch4 = driver.find_element(By.CSS_SELECTOR, '#mat-input-30')
 ch4.clear()
 ch4.click()
 (
-    action.send_keys('PTZ카메라연결').key_down(Keys.TAB).send_keys('rtsp://172.16.6.205:554/AVStream1_1').key_down(Keys.TAB)
-    .send_keys('root').key_down(Keys.TAB).send_keys('pass').perform()
+    action.send_keys('PTZ카메라연결').key_down(Keys.TAB).send_keys('rtsp://172.16.6.202/video1+audio1').key_down(Keys.TAB)
+    .send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').perform()
 )
 ch4PTZlist = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-camera-setting > div > mat-card > form > mat-table > mat-row:nth-child(9) > mat-cell.mat-cell.cdk-column-conType.mat-column-conType.ng-star-inserted > mat-form-field')
 ch4PTZlist.click()
