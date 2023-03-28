@@ -32,71 +32,48 @@ action.reset_actions
 time.sleep(2)
 print('Login OK!\n----------------------------------------------------------------------------------------------------------------')
 
+# 화면 표시 팝업
 osd_btn = driver.find_element(By.CSS_SELECTOR,\
     'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-card:nth-child(3) > div > button'\
         )
-osd_btn.click() # 화면 표시 팝업
+osd_btn.click()
 time.sleep(1)
-
-checkbox_ids = ['mat-checkbox-3', 'mat-checkbox-4', 'mat-checkbox-5', 'mat-checkbox-6', 'mat-checkbox-8', 'mat-checkbox-9', 'mat-checkbox-10', 'mat-checkbox-11', 'mat-checkbox-12', 'mat-checkbox-13', 'mat-checkbox-7']
+checkbox_ids = [
+    'mat-checkbox-3', 'mat-checkbox-4', 'mat-checkbox-5', 'mat-checkbox-6', 'mat-checkbox-8', 'mat-checkbox-9', 'mat-checkbox-10', 'mat-checkbox-11', 'mat-checkbox-12', 'mat-checkbox-13',
+    'mat-checkbox-7'
+    ]
 for checkbox_id in checkbox_ids:
     driver.find_element(By.ID, checkbox_id).click()
 time.sleep(1)
-
-time.sleep(1)
 osd_apply_btn = driver.find_element(By.XPATH, '//*[@id="mat-dialog-0"]/display-option-dialog/div/div[2]/button[1]')
-osd_apply_btn.click() # 화면 표시 팝업 적용
+osd_apply_btn.click()
 print('OSD All enable OK')
 
+# 채널별 계수기 초기화, 분석 재시작
 count_reset = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/button')
-count_reset.click() # 계수기 초기화
 va_restart = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/app-btn-va-restart/button/span')
-va_restart.click() # 영상 분석 재시작
-print('Ch1 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
-cam_list = driver.find_element(By.ID, 'mat-select-3')
-cam_list.click() # 카메라 리스트
-driver.find_element(By.ID, 'mat-option-1').click() # 채널2
-count_reset.click()
-va_restart.click()
-time.sleep(2)
-print('Ch2 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
-cam_list.click() 
-driver.find_element(By.ID, 'mat-option-2').click() # 채널3
-count_reset.click()
-va_restart.click()
-time.sleep(2)
-print('Ch3 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
-cam_list.click() 
-driver.find_element(By.ID, 'mat-option-3').click() # 채널4
-count_reset.click()
-va_restart.click()
-time.sleep(2)
-print('Ch4 Count Reset & Va Restart OK!\n----------------------------------------------------------------------------------------------------------------')
+count_reset.click() 
+va_restart.click() 
+cam_list = driver.find_element(By.ID, 'mat-select-3') # 라이브 페이지 채널 리스트
 
+channels = [1,2,3]
+for channel in channels:
+    cam_list.click()
+    driver.find_element(By.ID, f'mat-option-{channel}').click()
+    count_reset.click()
+    va_restart.click()
+    time.sleep(2)
+    print(f'ch{channel+1} Count Reset & Va Restart OK')
+
+# PTZ 이미지 추적
 pyautogui.scroll(-1000)
-ptz_r = pyautogui.locateOnScreen('ptz_right.png')
-pyautogui.mouseDown(ptz_r)
-time.sleep(2)
-ptz_l = pyautogui.locateOnScreen('ptz_left.png')
-pyautogui.mouseDown(ptz_l)
-time.sleep(2)
-ptz_u = pyautogui.locateOnScreen('ptz_up.png')
-pyautogui.mouseDown(ptz_u)
-time.sleep(2)
-ptz_d = pyautogui.locateOnScreen('ptz_down.png')
-pyautogui.mouseDown(ptz_d)
-time.sleep(2)
-ptz_dl = pyautogui.locateOnScreen('ptz_downleft.png')
-pyautogui.mouseDown(ptz_dl)
-time.sleep(2)
-ptz_dr = pyautogui.locateOnScreen('ptz_downright.png')
-pyautogui.mouseDown(ptz_dr)
-time.sleep(2)
-ptz_ul = pyautogui.locateOnScreen('ptz_upleft.png')
-pyautogui.mouseDown(ptz_ul)
-time.sleep(2)
-ptz_ur = pyautogui.locateOnScreen('ptz_upright.png')
-pyautogui.mouseDown(ptz_ur)
-time.sleep(2)
+ptz_images = [
+    'ptz_right.png', 'ptz_left.png', 'ptz_up.png', 'ptz_down.png',
+    'ptz_downleft.png', 'ptz_downright.png', 'ptz_upleft.png', 'ptz_upright.png'
+    ]
+for ptz_image in ptz_images:
+    ptz = pyautogui.locateOnScreen(ptz_image)
+    pyautogui.mouseDown(ptz)
+    time.sleep(2)
 pyautogui.click()
 print('PTZ Control OK!\n----------------------------------------------------------------------------------------------------------------')
