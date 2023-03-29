@@ -34,83 +34,52 @@ time.sleep(4) # RTSP 출력시 간헐적 스크롤UP 방지 대기 시간
 pyautogui.scroll(-1000)
 time.sleep(2)
 
+# PTZ 컨트롤 이미지
 ptz_r = pyautogui.locateOnScreen('ptz_right.png')
-pyautogui.mouseDown(ptz_r)
-time.sleep(1)
-# pyautogui.mouseUp(ptz_r)
-preset_no = driver.find_element(By.ID, 'mat-input-11') # 프리셋 번호 텍스트
-preset_no.clear()
-preset_no.send_keys("1") # 프리셋 1번
-btn_preset_set = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[2]/span')
-btn_preset_set.click() # 프리셋 설정 버튼
-
 ptz_l = pyautogui.locateOnScreen('ptz_left.png')
-pyautogui.mouseDown(ptz_l)
-time.sleep(2)
-preset_no.clear()
-preset_no.send_keys("2") # 프리셋 2번
-btn_preset_set.click()
-
 ptz_u = pyautogui.locateOnScreen('ptz_up.png')
-pyautogui.mouseDown(ptz_u)
-time.sleep(2)
-preset_no.clear()
-preset_no.send_keys("3") # 프리셋 3번
-btn_preset_set.click()
-
 ptz_d = pyautogui.locateOnScreen('ptz_down.png')
-pyautogui.mouseDown(ptz_d)
-time.sleep(2)
-preset_no.clear()
-preset_no.send_keys("4") # 프리셋 4번
-btn_preset_set.click()
-
 ptz_dl = pyautogui.locateOnScreen('ptz_downleft.png')
-pyautogui.mouseDown(ptz_dl)
-time.sleep(2)
-preset_no.clear()
-preset_no.send_keys("5") # 프리셋 5번
-btn_preset_set.click() 
-
 ptz_dr = pyautogui.locateOnScreen('ptz_downright.png')
-pyautogui.mouseDown(ptz_dr)
-time.sleep(2)
-preset_no.clear()
-preset_no.send_keys("6") # 프리셋 6번
-btn_preset_set.click()
-
 ptz_ul = pyautogui.locateOnScreen('ptz_upleft.png')
-pyautogui.mouseDown(ptz_ul)
-time.sleep(2)
-preset_no.clear()
-preset_no.send_keys("7") # 프리셋 7번
-btn_preset_set.click()
-
 ptz_ur = pyautogui.locateOnScreen('ptz_upright.png')
-pyautogui.mouseDown(ptz_ur)
-time.sleep(2)
-preset_no.clear()
-preset_no.send_keys("8") # 프리셋 8번
-btn_preset_set.click()
-print(
-    '''PTZ Move Right, Left, Up, Down
-    Down Left, Right
-    Preset 1,2,3,4,5,6,7,8 OK!\n------------------------------------------------------------------------------------------'''
-     )
-
 ptz_zoomin = pyautogui.locateOnScreen('zoom_in.png')
-pyautogui.mouseDown(ptz_zoomin)
-time.sleep(1)
 ptz_zoomout = pyautogui.locateOnScreen('zoom_out.png')
-pyautogui.mouseDown(ptz_zoomout)
-time.sleep(3)
-pyautogui.click()
-print('Zoom In, Out OK\n------------------------------------------------------------------------------------------')
 
-preset_no.clear() # 프리셋 텍스트 삭제
-preset_no.send_keys("1") # 프리셋 1번
+preset_text = driver.find_element(By.ID, 'mat-input-11') # 프리셋 번호 텍스트
+btn_preset_set = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[2]/span')
 btn_preset_mv = driver.find_element(
     By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[1]/span'
     )
+
+ptz_images = [
+    'ptz_right.png', 'ptz_left.png', 'ptz_up.png', 'ptz_down.png',
+    'ptz_downleft.png', 'ptz_downright.png', 'ptz_upleft.png', 'ptz_upright.png'
+    ]
+zoom_images = [
+    'zoom_in.png','zoom_out.png'
+    ]
+preset_nums = [
+    '1','2','3','4','5','6','7','8'
+    ]
+
+# 순차적으로 ptz_images와 preset_nums로 지정
+for ptz_image, preset_num in zip(ptz_images, preset_nums):
+    ptz = pyautogui.locateOnScreen(ptz_image)
+    pyautogui.mouseDown(ptz)
+    time.sleep(2)
+    preset_text.clear()
+    preset_text.send_keys(preset_num)
+    btn_preset_set.click()
+    print(f"Preset {preset_num} set for {ptz_image}")
+
+for zoom_image in zoom_images:
+    zoom = pyautogui.locateOnScreen(zoom_image)
+    pyautogui.mouseDown(zoom)
+    time.sleep(2)
+    print(f"Zoom set for {zoom_image}")
+
+preset_text.clear() # 프리셋 텍스트 삭제
+preset_text.send_keys("1") # 프리셋 1번
 btn_preset_mv.click() # 프리셋 1번으로 이동
 print('Move to Preset1 OK')
