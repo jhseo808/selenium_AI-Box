@@ -31,20 +31,17 @@ cam_list = driver.find_element(By.ID, 'mat-select-3')
 cam_list.click() # 카메라 리스트
 driver.find_element(By.ID, 'mat-option-3').click() # 채널4
 time.sleep(4) # RTSP 출력시 간헐적 스크롤UP 방지 대기 시간
-
 pyautogui.scroll(-1000)
 time.sleep(2)
 
 ptz_r = pyautogui.locateOnScreen('ptz_right.png')
 pyautogui.mouseDown(ptz_r)
 time.sleep(1)
-pyautogui.mouseUp(ptz_r)
+# pyautogui.mouseUp(ptz_r)
 preset_no = driver.find_element(By.ID, 'mat-input-11') # 프리셋 번호 텍스트
-preset_no.clear() # 프리셋 텍스트 삭제
+preset_no.clear()
 preset_no.send_keys("1") # 프리셋 1번
-btn_preset_set = driver.find_element(By.XPATH, (
-                                     '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[2]/span')
-                                     )
+btn_preset_set = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[2]/span')
 btn_preset_set.click() # 프리셋 설정 버튼
 
 ptz_l = pyautogui.locateOnScreen('ptz_left.png')
@@ -114,6 +111,6 @@ preset_no.clear() # 프리셋 텍스트 삭제
 preset_no.send_keys("1") # 프리셋 1번
 btn_preset_mv = driver.find_element(
     By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[1]/span'
-                                  )
+    )
 btn_preset_mv.click() # 프리셋 1번으로 이동
 print('Move to Preset1 OK')
