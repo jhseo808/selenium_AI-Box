@@ -11,12 +11,15 @@ import unittest
 import HtmlTestRunner
 import os
 
+# 라이브 및 스트리밍 스트린샷 저장 경로
 try:
     os.makedirs('D:\Auto_test')
     print('Auto테스트 파일이 생성되었습니다.')
 except FileExistsError as a:
     print(a)
 
+# sys.stdout = open('D:\Auto_test\AI-Box_log.txt','w') # 프린트 로그 파일 저장
+    
 #브라우저 꺼짐 방지
 options = Options()
 options.add_experimental_option("detach", True)
@@ -25,12 +28,13 @@ driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(3)
 driver.maximize_window()
 
+# HTML Report 연동 테스트
 class AIBoxTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.driver = driver
         
-    def test_login(self):
+    def test_login(self): # 로그인 테스트
         driver = self.driver
         driver.get('http://172.16.6.230/web/#/web/auth')
         action = ActionChains(driver)
@@ -41,7 +45,7 @@ class AIBoxTest(unittest.TestCase):
         print('Login OK')
         assert "No results found." not in driver.page_source
 
-    def test_osd(self):
+    def test_osd(self): # osd 활성화 테스트
         # 화면 표시 팝업
         osd_btn = driver.find_element(By.CSS_SELECTOR,\
             'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-live > div.flex-container > mat-card:nth-child(3) > div > button'\
