@@ -18,7 +18,8 @@ try:
 except FileExistsError as a:
     print(a)
 
-# sys.stdout = open('D:\Auto_test\AI-Box_log.txt','w') # 프린트 로그 파일 저장
+# 프린트 로그 파일 저장
+# sys.stdout = open('D:\Auto_test\AI-Box_log.txt','w')
     
 #브라우저 꺼짐 방지
 options = Options()
