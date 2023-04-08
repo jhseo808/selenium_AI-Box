@@ -33,23 +33,43 @@ time.sleep(1)
 print('Login OK')
 
 driver.get('http://172.16.6.230/web/#/web/license') # 시스템 > 라이선스
-driver.find_element(By.ID, 'mat-select-9').click() # CH1 라이선스 리스트
-license_set = driver.find_elements(By.CLASS_NAME, 'mat-option-text')
-for int, license_list in enumerate(license_set):
-    print(
-        "=======================\nLicense List:", license_list.text,"\n======================="
-    ) # 등록된 라이선스 리스트
-driver.find_element(By.ID, 'mat-option-32').click() # CH1 TOTAL
-driver.find_element(By.ID, 'mat-select-11').click() # CH2 라이선스 리스트
-driver.find_element(By.ID, 'mat-option-35').click() # CH2 TOTAL
-driver.find_element(By.ID, 'mat-select-12').click() # CH3 라이선스 리스트
-driver.find_element(By.ID, 'mat-option-36').click() # CH3 TOTAL
-driver.find_element(By.ID, 'mat-select-13').click() # CH4 라이선스 리스트
-driver.find_element(By.ID, 'mat-option-38').click() # CH4 TOTAL
+
+select_ids = ['mat-select-9', 'mat-select-11', 'mat-select-12', 'mat-select-13'] # 라이선스 리스트
+option_ids = ['mat-option-32', 'mat-option-35', 'mat-option-36', 'mat-option-38'] # 라이선스 TOTAL
+
+for select_id, option_id in zip(select_ids, option_ids):
+    select_elem = driver.find_element(By.ID, select_id)
+    select_elem.click()
+    option_elem = driver.find_element(By.ID, option_id)
+    option_elem.click()
+    print('Ch license:',option_elem.text)
+
 btn_license_apply = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-license/div/mat-card/mat-list[1]/mat-card/div[3]/app-btn-apply/button/span')
 btn_license_apply.click()
-print('License CH apply complete!\n----------------------------------------------------------------')
+print('Ch License apply OK')
+
+driver.find_element(By.ID, 'mat-select-10').click() # 직접 등록
+time.sleep(1)
+manual_license = driver.find_elements(By.CLASS_NAME, 'mat-option-text') # 라이선스 리스트 출력
+for idx, license_list in enumerate(manual_license):
+    print(license_list.text)
+'''
+mat-option-19 VIX-120B
+mat-option-20 VIX-220B 
+mat-option-21 VIX-220F 
+mat-option-22 VIX-220P 
+mat-option-23 VIX-220R 
+mat-option-24 VIX-220S 
+mat-option-25 VIXAI-120B 
+mat-option-26 VIXAI-220B 
+mat-option-27 VIXAI-220F 
+mat-option-28 VIXAI-220P 
+mat-option-29 VIXAI-220R 
+mat-option-30 VIXAI-VIXAI-220S 
+mat-option-31 TOTALLINTELLIVIX 
+'''
+manual_list = driver.find_element(By.CLASS_NAME, 'mat-option-text')
+for idx, list in enumerate(manual_list):
+    print(list.text)
 # driver.get_screenshot_as_file('D:\Auto_test\license.png')
-# print('system_license complte!\n----------------------------------------------------------------')
-# time.sleep(1)
 # pyautogui.scroll(-500)
