@@ -68,8 +68,9 @@ mat-option-29 VIXAI-220R
 mat-option-30 VIXAI-VIXAI-220S 
 mat-option-31 TOTALLINTELLIVIX 
 '''
-mriver.find_element(By.ID, 'mat-option-31').click()
+driver.find_element(By.ID, 'mat-option-31').click() # TOTAL 선택
 
+# 시리얼, 라이선스 입력
 serial = driver.find_element(By.ID, 'mat-input-12')
 serial.click()
 (action.send_keys('시리얼 번호 입력하세요').key_down(Keys.TAB).send_keys('라이선스 키 입력하세요').perform())
