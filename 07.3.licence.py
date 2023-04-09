@@ -68,8 +68,16 @@ mat-option-29 VIXAI-220R
 mat-option-30 VIXAI-VIXAI-220S 
 mat-option-31 TOTALLINTELLIVIX 
 '''
-manual_list = driver.find_element(By.CLASS_NAME, 'mat-option-text')
-for idx, list in enumerate(manual_list):
-    print(list.text)
+mriver.find_element(By.ID, 'mat-option-31').click()
+
+serial = driver.find_element(By.ID, 'mat-input-12')
+serial.click()
+(action.send_keys('시리얼 번호 입력하세요').key_down(Keys.TAB).send_keys('라이선스 키 입력하세요').perform())
+
+btn_online_apply = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-license/div/mat-card/mat-list[3]/mat-card/div[5]/app-btn-online-registration/button')
+btn_offline_apply = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-license/div/mat-card/mat-list[3]/mat-card/div[5]/app-btn-offline-registration/button')
+# btn_online_apply.click()
+# btn_offline_apply.click()
+
 # driver.get_screenshot_as_file('D:\Auto_test\license.png')
 # pyautogui.scroll(-500)
