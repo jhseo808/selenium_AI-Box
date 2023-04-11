@@ -30,7 +30,7 @@ driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
 (action.send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform()) # 로그인
 action.reset_actions
 time.sleep(2)
-print('Login OK!\n----------------------------------------------------------------------------------------------------------------')
+print('Login ok')
 
 # 화면 표시 팝업
 osd_btn = driver.find_element(By.CSS_SELECTOR,\
@@ -47,7 +47,7 @@ for checkbox_id in checkbox_ids:
 time.sleep(1)
 osd_apply_btn = driver.find_element(By.XPATH, '//*[@id="mat-dialog-0"]/display-option-dialog/div/div[2]/button[1]')
 osd_apply_btn.click()
-print('OSD All enable OK')
+print('OSD All enable ok')
 
 # 채널별 계수기 초기화, 분석 재시작
 count_reset = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-list/mat-card/div/button')
@@ -63,7 +63,7 @@ for channel in channels:
     count_reset.click()
     va_restart.click()
     time.sleep(2)
-    print(f'ch{channel+1} Count Reset & Va Restart OK')
+    print(f'ch{channel+1} Count Reset & Va Restart ok')
 
 # PTZ 이미지 추적
 pyautogui.scroll(-1000)
@@ -76,4 +76,4 @@ for ptz_image in ptz_images:
     pyautogui.mouseDown(ptz)
     time.sleep(2)
 pyautogui.click()
-print('PTZ Control OK!\n----------------------------------------------------------------------------------------------------------------')
+print('PTZ Control ok')
