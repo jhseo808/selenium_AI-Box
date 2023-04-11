@@ -65,6 +65,18 @@ for channel in channels:
     time.sleep(2)
     print(f'ch{channel+1} Count Reset & Va Restart ok')
 
+# PTZ 컨트롤 이미지
+ptz_r = pyautogui.locateOnScreen('ptz_right.png')
+ptz_l = pyautogui.locateOnScreen('ptz_left.png')
+ptz_u = pyautogui.locateOnScreen('ptz_up.png')
+ptz_d = pyautogui.locateOnScreen('ptz_down.png')
+ptz_dl = pyautogui.locateOnScreen('ptz_downleft.png')
+ptz_dr = pyautogui.locateOnScreen('ptz_downright.png')
+ptz_ul = pyautogui.locateOnScreen('ptz_upleft.png')
+ptz_ur = pyautogui.locateOnScreen('ptz_upright.png')
+ptz_zoomin = pyautogui.locateOnScreen('zoom_in.png')
+ptz_zoomout = pyautogui.locateOnScreen('zoom_out.png')
+
 # PTZ 이미지 추적
 pyautogui.scroll(-1000)
 ptz_images = [
@@ -77,3 +89,33 @@ for ptz_image in ptz_images:
     time.sleep(2)
 pyautogui.click()
 print('PTZ Control ok')
+
+preset_text = driver.find_element(By.ID, 'mat-input-11') # 프리셋 번호 텍스트
+btn_preset_set = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[2]/span')
+btn_preset_mv = driver.find_element(
+    By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-live/div[1]/mat-card[2]/div/app-ptz-control/div/div/div[2]/div[2]/button[1]/span'
+    )
+
+zoom_images = ['zoom_in.png','zoom_out.png']
+preset_nums = ['1','2','3','4','5','6','7','8']
+
+# 순차적으로 ptz_images와 preset_nums로 지정
+for ptz_image, preset_num in zip(ptz_images, preset_nums):
+    ptz = pyautogui.locateOnScreen(ptz_image)
+    pyautogui.mouseDown(ptz)
+    time.sleep(2)
+    preset_text.clear()
+    preset_text.send_keys(preset_num)
+    btn_preset_set.click()
+    print(f"Preset {preset_num} set for {ptz_image}")
+
+for zoom_image in zoom_images:
+    zoom = pyautogui.locateOnScreen(zoom_image)
+    pyautogui.mouseDown(zoom)
+    time.sleep(2)
+    print(f"Zoom set for {zoom_image}")
+
+preset_text.clear() # 프리셋 텍스트 삭제
+preset_text.send_keys("1") # 프리셋 1번
+btn_preset_mv.click() # 프리셋 1번으로 이동
+print('Move to Preset1 OK')
