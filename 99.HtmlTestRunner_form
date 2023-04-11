@@ -1,0 +1,29 @@
+import unittest
+import HtmlTestRunner
+
+class AIBoxTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        options = Options()
+        options.add_experimental_option("detach", True)
+        service = Service(executable_path=ChromeDriverManager().install())
+        cls.driver = webdriver.Chrome(service=service, options=options)
+        cls.driver.implicitly_wait(3)
+        cls.driver.maximize_window()
+        
+    def test1(self):
+      test
+      
+    def test2(self):
+      test
+     
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.close()
+        cls.driver.quit()
+        print('test complete')
+        
+if __name__ == '__main__':
+    runner = HtmlTestRunner.HTMLTestRunner(output='report')
+    suite = unittest.TestLoader().loadTestsFromTestCase(AIBoxTest)
+    runner.run(suite)
