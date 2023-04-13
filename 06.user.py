@@ -24,31 +24,49 @@ driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
 (action.send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform())
 action.reset_actions
 time.sleep(1)
-print('Login OK\n----------------------------------------------------------------')
+print('Login ok')
 
-url = 'http://172.16.6.230/web/#/web/user-setting'
-driver.get(url) # 네트워크 페이지
+# 네트워크 페이지
+driver.get('http://172.16.6.230/web/#/web/user-setting') 
 time.sleep(1)
 '''
-driver.find_element(By.ID, 'mat-input-13').click() #  현재 비밀번호
+# 관리자 현재 pw, 새 pw 변경
+driver.find_element(By.ID, 'mat-input-13').click() 
 action.send_keys('Pass0001!').perform()
-driver.find_element(By.ID, 'mat-input-14').click() #  새 비밀번호
-action.send_keys('Pass0001!!').perform()
-driver.find_element(By.ID, 'mat-input-15').click() #  새 비밀번호 확인
-action.send_keys('Pass0001!!').perform()
+driver.find_element(By.ID, 'mat-input-14').click() 
+action.send_keys('Pass0001!!').key_down(Keys.TAB).send_keys('Pass0001!!').perform()
 
 btn_user_apply = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-user-setting > div > mat-card > div:nth-child(4) > app-btn-apply > button')
 btn_user_apply.click()
-print('Password change complte!\n----------------------------------------------------------------')
-btn_logout = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-toolbar > button:nth-child(4)')
-btn_logout.click()
+print('Password change ok')
+time.sleep(1)
+
+driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
+(action.send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!!').pause(1).key_down(Keys.ENTER).perform())
+action.reset_actions
+time.sleep(1)
+
+# 네트워크 페이지
+driver.get('http://172.16.6.230/web/#/web/user-setting') 
+time.sleep(1)
+
+# 변경된 관리자 현재 pw, 새 pw
+driver.find_element(By.ID, 'mat-input-20').click() 
+action.send_keys('Pass0001!!').perform()
+driver.find_element(By.ID, 'mat-input-21').click() 
+action.send_keys('Pass0001!').key_down(Keys.TAB).send_keys('Pass0001!').perform()
+
+btn_user_apply = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-user-setting > div > mat-card > div:nth-child(4) > app-btn-apply > button')
+btn_user_apply.click()
+print('Password change ok')
+time.sleep(1)
 
 driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
 (action.send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform())
 action.reset_actions
 time.sleep(1)
-'''
 
+'''
 # 사용자 계정 10개 추가
 for i in range(10):
     btn_user_add = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-user-setting > div > mat-card > mat-list:nth-child(3) > mat-card > div.flex-row > div.ng-star-inserted > app-btn-add')
@@ -82,9 +100,9 @@ action.perform()
 btn_user_apply = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-sidenav-container > mat-sidenav-content > app-user-setting > div > mat-card > div:nth-child(4) > app-btn-apply > button')
 btn_user_apply.click()
 time.sleep(1)
-print('10 user add OK')
+print('10 user add ok')
 '''
-# 다른 유저ID로 로그인 확인
+# user10으로 로그인 확인
 btn_logout = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-toolbar > button:nth-child(4)')
 btn_logout.click()
 
@@ -92,7 +110,7 @@ driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
 (action.send_keys('qatest10').key_down(Keys.TAB).send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform())
 action.reset_actions
 time.sleep(1)
-print('User:No.10 Login OK\n----------------------------------------------------------------')
+print('User10 Login ok')
 
 btn_logout = driver.find_element(By.CSS_SELECTOR, 'body > app-root > app-sidenav-responsive > div > mat-toolbar > button:nth-child(4)')
 btn_logout.click()
@@ -101,7 +119,7 @@ driver.find_element(By.CLASS_NAME, 'mat-form-field-infix')
 (action.send_keys('admin').key_down(Keys.TAB).send_keys('Pass0001!').pause(1).key_down(Keys.ENTER).perform())
 action.reset_actions
 time.sleep(1)
-driver.get(url) # 네트워크 페이지
+driver.get('http://172.16.6.230/web/#/web/user-setting') # 네트워크 페이지
 time.sleep(1)
 '''
 # 사용자 전체 제거
