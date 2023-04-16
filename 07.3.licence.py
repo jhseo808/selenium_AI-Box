@@ -34,8 +34,8 @@ print('Login OK')
 
 driver.get('http://172.16.6.230/web/#/web/license') # 시스템 > 라이선스
 
-select_ids = ['mat-select-9', 'mat-select-11', 'mat-select-12', 'mat-select-13'] # 라이선스 리스트
-option_ids = ['mat-option-32', 'mat-option-35', 'mat-option-36', 'mat-option-38'] # 라이선스 TOTAL
+select_ids = ['mat-select-10', 'mat-select-12', 'mat-select-13', 'mat-select-14'] # 라이선스 리스트
+option_ids = ['mat-option-33', 'mat-option-36', 'mat-option-37', 'mat-option-39'] # 라이선스 TOTAL
 
 for select_id, option_id in zip(select_ids, option_ids):
     select_elem = driver.find_element(By.ID, select_id)
@@ -48,32 +48,33 @@ btn_license_apply = driver.find_element(By.XPATH, '/html/body/app-root/app-siden
 btn_license_apply.click()
 print('Ch License apply OK')
 
-driver.find_element(By.ID, 'mat-select-10').click() # 직접 등록
+pyautogui.scroll(-1000)
+driver.find_element(By.ID, 'mat-select-11').click() # 직접 등록
 time.sleep(1)
 manual_license = driver.find_elements(By.CLASS_NAME, 'mat-option-text') # 라이선스 리스트 출력
 for idx, license_list in enumerate(manual_license):
     print(license_list.text)
 '''
-mat-option-19 VIX-120B
-mat-option-20 VIX-220B 
-mat-option-21 VIX-220F 
-mat-option-22 VIX-220P 
-mat-option-23 VIX-220R 
-mat-option-24 VIX-220S 
-mat-option-25 VIXAI-120B 
-mat-option-26 VIXAI-220B 
-mat-option-27 VIXAI-220F 
-mat-option-28 VIXAI-220P 
-mat-option-29 VIXAI-220R 
-mat-option-30 VIXAI-VIXAI-220S 
-mat-option-31 TOTALLINTELLIVIX 
+mat-option-20 VIX-120B
+mat-option-21 VIX-220B 
+mat-option-22 VIX-220F 
+mat-option-23 VIX-220P 
+mat-option-24 VIX-220R 
+mat-option-25 VIX-220S 
+mat-option-26 VIXAI-120B 
+mat-option-27 VIXAI-220B 
+mat-option-28 VIXAI-220F 
+mat-option-29 VIXAI-220P 
+mat-option-30 VIXAI-220R 
+mat-option-31 VIXAI-VIXAI-220S 
+mat-option-32 TOTALLINTELLIVIX 
 '''
-driver.find_element(By.ID, 'mat-option-31').click() # TOTAL 선택
+driver.find_element(By.ID, 'mat-option-32').click() # TOTAL 선택
 
 # 시리얼, 라이선스 입력
-serial = driver.find_element(By.ID, 'mat-input-12')
+serial = driver.find_element(By.ID, 'mat-input-16')
 serial.click()
-(action.send_keys('시리얼 번호 입력하세요').key_down(Keys.TAB).send_keys('라이선스 키 입력하세요').perform())
+(action.send_keys('시리얼 번호 입력하세요!!').key_down(Keys.TAB).send_keys('라이선스 키 입력하세요!!').perform())
 
 btn_online_apply = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-license/div/mat-card/mat-list[3]/mat-card/div[5]/app-btn-online-registration/button')
 btn_offline_apply = driver.find_element(By.XPATH, '/html/body/app-root/app-sidenav-responsive/div/mat-sidenav-container/mat-sidenav-content/app-license/div/mat-card/mat-list[3]/mat-card/div[5]/app-btn-offline-registration/button')
